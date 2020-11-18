@@ -7,7 +7,7 @@ export const register = async (req: Request, res: Response) => {
   const username: string = req.body.username;
 
   // Validate request
-  if (!username || !req.body.password || !req.body.fullName) {
+  if (!username || !req.body.password || !req.body.fullName || !req.body.email) {
     res.status(400).send({
       message: 'Missing data!',
     });
@@ -21,14 +21,15 @@ export const register = async (req: Request, res: Response) => {
       }
     })
     .then(() => hash(req.body.password, 8))
-    .then(password => new User({
+    .then((password: string) => new User({
       username,
       password,
+      email: req.body.email,
       role: req.body.role,
       fullName: req.body.fullName,
     }))
-    .then(user => user.save())
-    .then(savedUser => {
+    .then((user: User) => user.save())
+    .then((savedUser: User) => {
       // authenticate the user
       (req.session as any).user = savedUser;
       res.status(201).send();

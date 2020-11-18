@@ -38,7 +38,8 @@ For exmaple, to reguster a user, you need to do a POST request to `<server-url>/
 {
   "username": "johndoe1",
   "password": "123456",
-  "fullName": "John Doe"
+  "fullName": "John Doe",
+  "email": "johndoe@test.com"
 }
 ```
 If the registration was successful, the user should be instantly logged in with a session. A similar request is required for login but on the `/api/login` endpoint using *username* and *password*. If you want to log out simply do an empty POST request to `/api/logout`.
