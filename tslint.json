@@ -1,0 +1,93 @@
+{
+    "defaultSeverity": "error",
+    "extends": [
+        "tslint:recommended"
+    ],
+    "jsRules": {},
+    "rules": {
+      "arrow-return-shorthand": true,
+      "curly": true,
+      "import-spacing": true,
+      "max-line-length": [
+        true,
+        140
+      ],
+      "member-ordering": [
+        true,
+        {
+          "order": [
+            "static-field",
+            "instance-field",
+            "static-method",
+            "instance-method"
+          ]
+        }
+      ],
+      "no-any": true,
+      "no-switch-case-fall-through": true,
+      "no-var-requires": false,
+      "object-literal-key-quotes": [
+        true,
+        "as-needed"
+      ],
+      "quotemark": [
+        true,
+        "single"
+      ],
+      "semicolon": {
+        "options": [
+          "always"
+        ]
+      },
+      "space-before-function-paren": {
+        "options": {
+          "anonymous": "never",
+          "asyncArrow": "always",
+          "constructor": "never",
+          "method": "never",
+          "named": "never"
+        }
+      },
+      "typedef": [
+        true,
+        "call-signature"
+      ],
+      "typedef-whitespace": {
+        "options": [
+          {
+            "call-signature": "nospace",
+            "index-signature": "nospace",
+            "parameter": "nospace",
+            "property-declaration": "nospace",
+            "variable-declaration": "nospace"
+          },
+          {
+            "call-signature": "onespace",
+            "index-signature": "onespace",
+            "parameter": "onespace",
+            "property-declaration": "onespace",
+            "variable-declaration": "onespace"
+          }
+        ]
+      },
+      "ordered-imports": true,
+      "variable-name": {
+        "options": [
+          "ban-keywords",
+          "check-format",
+          "allow-pascal-case"
+        ]
+      },
+      "whitespace": {
+        "options": [
+          "check-branch",
+          "check-decl",
+          "check-operator",
+          "check-separator",
+          "check-type",
+          "check-typecast"
+        ]
+      }
+    },
+    "rulesDirectory": []
+}
