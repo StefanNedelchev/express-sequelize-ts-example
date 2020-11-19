@@ -1,4 +1,4 @@
-import { AllowNull, BelongsTo, Column, ForeignKey, Model, Table, Unique } from 'sequelize-typescript';
+import { AllowNull, BelongsTo, Column, Default, ForeignKey, Model, Table, Unique } from 'sequelize-typescript';
 import { User } from '../user/user.model';
 
 @Table
@@ -13,8 +13,9 @@ export class BlogPost extends Model<BlogPost> {
   @Column
   description!: string;
 
+  @Default(false)
   @Column
-  published: boolean = false;
+  published!: boolean;
 
   @ForeignKey(() => User)
   @Column
