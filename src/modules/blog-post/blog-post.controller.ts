@@ -21,9 +21,7 @@ export const create = (req: Request, res: Response) => {
   });
 
   blogPost.save()
-    .then((data: BlogPost) => {
-      res.send(data);
-    })
+    .then((data: BlogPost) => res.send(data))
     .catch((err) => {
       res.status(500).send({
         message:
@@ -37,9 +35,7 @@ export const findAll = (req: Request, res: Response) => {
   const condition = title ? { title: { [Op.like]: `%${title}%` } } : undefined;
 
   BlogPost.findAll({ where: condition })
-    .then((blogPosts: BlogPost[]) => {
-      res.send(blogPosts);
-    })
+    .then((blogPosts: BlogPost[]) => res.send(blogPosts))
     .catch((err) => {
       res.status(500).send({
         message:
@@ -52,9 +48,7 @@ export const findOne = (req: Request, res: Response) => {
   const { id } = req.params;
 
   BlogPost.findByPk(id)
-    .then((blogPost: BlogPost | null) => {
-      res.send(blogPost);
-    })
+    .then((blogPost: BlogPost | null) => res.send(blogPost))
     .catch((err) => {
       res.status(500).send({
         message: `Error retrieving blog post with id=${id}`,
@@ -65,9 +59,7 @@ export const findOne = (req: Request, res: Response) => {
 export const update = (req: Request, res: Response) => {
   const { id } = req.params;
 
-  BlogPost.update(req.body as BlogPost, {
-    where: { id },
-  })
+  BlogPost.update(req.body as BlogPost, { where: { id }, })
     .then(([length]) => {
       if (length === 1) {
         res.send({
@@ -89,9 +81,7 @@ export const update = (req: Request, res: Response) => {
 export const deleteOne = (req: Request, res: Response) => {
   const { id } = req.params;
 
-  BlogPost.destroy({
-    where: { id },
-  })
+  BlogPost.destroy({ where: { id }, })
     .then((num) => {
       if (num === 1) {
         res.send({
@@ -115,9 +105,7 @@ export const deleteAll = (req: Request, res: Response) => {
     where: {},
     truncate: false,
   })
-    .then((nums) => {
-      res.send({ message: `${nums} BlogPosts were deleted successfully!` });
-    })
+    .then((nums) => res.send({ message: `${nums} BlogPosts were deleted successfully!` }))
     .catch((err) => {
       res.status(500).send({
         message:
@@ -127,11 +115,9 @@ export const deleteAll = (req: Request, res: Response) => {
 };
 
 export const findAllPublished = (req: Request, res: Response) => {
-  BlogPost.findAll({
-    where: { published: true }
-  }).then((blogPosts: BlogPost[]) => {
-    res.send(blogPosts);
-  }).catch((err) => {
+  BlogPost.findAll({ where: { published: true } })
+    .then((blogPosts: BlogPost[]) => res.send(blogPosts))
+    .catch((err) => {
     res.status(500).send({
       message:
         err.message || 'Some error occurred while retrieving published blog posts.',
@@ -158,9 +144,9 @@ export const findAllByUsername = (req: Request, res: Response) => {
         attributes: ['id'],
       }
     ]
-  }).then((blogPosts: BlogPost[]) => {
-    res.send(blogPosts);
-  }).catch((err) => {
+  })
+    .then((blogPosts: BlogPost[]) => res.send(blogPosts))
+    .catch((err) => {
     res.status(500).send({
       message:
         err.message || 'Some error occurred while retrieving blog posts.',
