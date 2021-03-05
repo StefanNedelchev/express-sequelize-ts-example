@@ -31,9 +31,11 @@ The `session.ts` file contains the initialization of the ExpressJS session featu
 The `app.ts` file is the main file of the application which is being run by the node server. Here we import all main packages, including our files `routes.ts`, `session.ts` and `sequelize.ts`. All necessary packages and configurations are being applied to the ExpressJS app and then it starts listening on the configured port.
 
 ## Running the pre-defined APIs
-All microservices can be accessed on the `/api/` url and you can find all route definitions in the `*.routes.ts` fiels of the modules. All end points work with JSON so you need to pass a `content-type: application/json` header.
+All microservices can be accessed on the `/api/` url and you can find all route definitions in the `*.routes.ts` fiels of the modules. All end points work with JSON so you need to pass a `content-type: application/json` header. The database is populated with 10 random users and blog-posts using the `faker` package.
 
-For exmaple, to reguster a user, you need to do a POST request to `<server-url>/api/register` and pass the following JSON structure:
+### Registering users
+
+For exmaple, to register a user, you need to do a POST request to `<server-url>/api/register` and pass the following JSON structure:
 ```json
 {
   "username": "johndoe1",
