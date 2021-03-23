@@ -11,7 +11,8 @@ Additionally - make sure that your IDE has TypeScript support and the necessary 
 Since the source code is in TypeScript, it needs to be compiled first before running. I've set up a few npm scripts that would ease that for you. All compiled files can be found in the `/dist` directory which is located in the root of the project.
 1. Running `npm run build` will simply compile the code in JavaScript using the TypeScript CLI.
 2. Running `npm run start` will compile the code and run it into a NodeJS server.
-3. Running `npm run dev` will use [nodemon](https://nodemon.io/) to directly run your project from the source without the need to compile. It also reloads the app everytime you make changes in your source and save them. This is the required command for running the app in dev environment.
+3. Running `npm run start:populate_db` will compile the code, run it into a NodeJS server, and *populate the databse with examples*.
+4. Running `npm run dev` will use [nodemon](https://nodemon.io/) to directly run your project from the source without the need to compile. It also reloads the app everytime you make changes in your source and save them. This is the required command for running the app in dev environment.
 
 You can also provide a `PORT` environment variable for explicitly chosing a port for the server. Otherwise the app will default to 8080.
 
