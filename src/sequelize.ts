@@ -26,7 +26,7 @@ const initializeSequelize = () => {
           acquire: 30000,
           idle: 10000,
         },
-        models: [User, BlogPost]
+        models: [User, BlogPost],
       }
     );
   }
@@ -34,4 +34,5 @@ const initializeSequelize = () => {
   return sequelize;
 };
 
-export default initializeSequelize();
+export const db = { BlogPost, User };
+export const intializedSequelize = initializeSequelize();

@@ -1,17 +1,13 @@
+// tslint:disable: no-console
 import { json, urlencoded } from 'body-parser';
 import compression from 'compression';
 import cors from 'cors';
 import express, { Application } from 'express';
 import { hidePoweredBy, noSniff, xssFilter } from 'helmet';
+import populateDatabase from './populateDatabase';
 import registerRoutes from './routes';
-import sequelize from './sequelize';
+import { intializedSequelize } from './sequelize';
 import registerSession from './session';
-
-// Uncomment the param passed to the sync method if you want your tables
-// to be dropped and re-created on each build
-sequelize?.sync(/*{ force: true }*/).then(() => {
-  console.log('Update database');
-});
 
 const app: Application = express();
 
@@ -36,7 +32,7 @@ app.use(noSniff());
 app.use(xssFilter());
 
 // initialize session
-registerSession(app, sequelize);
+registerSession(app, intializedSequelize);
 
 // simple route to check if the server works
 app.get('/', (req, res) => {
@@ -47,7 +43,15 @@ app.get('/', (req, res) => {
 registerRoutes(app);
 
 // set port, listen for requests
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}.`);
-});
+const startServer = () => {
+  const PORT = process.env.PORT || 8080;
+  app.listen(PORT, () => {
+    console.log(`Server is running on port http://localhost:${PORT}.`);
+  });
+};
+
+if (!!process.env.BUILD_DB) {
+  populateDatabase().then(startServer);
+} else {
+  startServer();
+}
