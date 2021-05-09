@@ -33,16 +33,17 @@ The `app.ts` file is the main file of the application which is being run by the 
 ## Running the pre-defined APIs
 All microservices can be accessed on the `/api/` url and you can find all route definitions in the `*.routes.ts` fiels of the modules. All end points work with JSON so you need to pass a `content-type: application/json` header.
 
-For exmaple, to reguster a user, you need to do a POST request to `<server-url>/api/register` and pass the following JSON structure:
+For exmaple, to reguster a user, you need to do a POST request to `<server-url>/api/auth/register` and pass the following JSON structure:
 ```json
 {
   "username": "johndoe1",
   "password": "123456",
   "fullName": "John Doe",
-  "email": "johndoe@test.com"
+  "email": "johndoe@test.com",
+  "role": 1
 }
 ```
-If the registration was successful, the user should be instantly logged in with a session. A similar request is required for login but on the `/api/login` endpoint using *username* and *password*. If you want to log out simply do an empty POST request to `/api/logout`.
+If the registration was successful, the user should be instantly logged in with a session. A similar request is required for login but on the `/api/auth/login` endpoint using *username* and *password*. If you want to log out simply do an empty POST request to `/api/auth/logout`.
 
 To create a blog post, **you need to be logged in** and do a POST request to `<server-url>/api/blog-posts` and pass the following JSON structure:
 ```json
