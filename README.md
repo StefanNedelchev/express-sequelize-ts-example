@@ -36,7 +36,7 @@ All microservices can be accessed on the `/api/` url and you can find all route 
 
 ### Registering users
 
-For exmaple, to register a user, you need to do a POST request to `<server-url>/api/register` and pass the following JSON structure:
+For exmaple, to register a user, you need to do a POST request to `<server-url>/api/auth/register` and pass the following JSON structure:
 ```json
 {
   "username": "johndoe1",
@@ -45,7 +45,7 @@ For exmaple, to register a user, you need to do a POST request to `<server-url>/
   "email": "johndoe@test.com"
 }
 ```
-If the registration was successful, the user should be instantly logged in with a session. A similar request is required for login but on the `/api/login` endpoint using *username* and *password*. If you want to log out simply do an empty POST request to `/api/logout`.
+If the registration was successful, the user should be instantly logged in with a session. A similar request is required for login but on the `/api/auth/login` endpoint using *username* and *password*. If you want to log out simply do an empty POST request to `/api/auth/logout`.
 
 To create a blog post, **you need to be logged in** and do a POST request to `<server-url>/api/blog-posts` and pass the following JSON structure:
 ```json
