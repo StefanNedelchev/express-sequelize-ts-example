@@ -1,11 +1,12 @@
 import { Application, NextFunction, Request, Response, Router } from 'express';
+import { UserSession } from '../../types';
 import { create, deleteAll, deleteOne, findAll, findAllByUsername, findAllPublished, findOne, update } from './blog-post.controller';
 
-export default (app: Application) => {
+export default (app: Application): void => {
   const router = Router();
 
   const checkLoggedIn = (req: Request, res: Response, next: NextFunction) => {
-    if ((req.session as any).user) {
+    if ((req.session as UserSession).user) {
       next();
     } else {
       const message = 'Not logged in!';

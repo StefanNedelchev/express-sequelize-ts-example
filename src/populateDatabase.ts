@@ -3,7 +3,7 @@ import faker from 'faker';
 import { random, times } from 'lodash';
 import { db, intializedSequelize } from './sequelize';
 
-export default () =>
+export default (): Promise<void> =>
   intializedSequelize
     // Clean tables
     .sync({ force: true })

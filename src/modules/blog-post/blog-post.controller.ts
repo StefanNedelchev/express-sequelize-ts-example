@@ -1,62 +1,73 @@
 import { Request, Response } from 'express';
-import { Op } from 'sequelize';
+import { Op, SequelizeScopeError } from 'sequelize';
+import { UserSession } from '../../types';
 import { User } from '../user/user.model';
 import { BlogPost } from './blog-post.model';
 
 
-export const create = (req: Request, res: Response) => {
+export const create = (req: Request, res: Response): void => {
+  const requestBody = req.body as Partial<BlogPost>;
+
   // Validate request
-  if (!req.body.title || !req.body.description) {
+  if (!requestBody.title || !requestBody.description) {
     res.status(400).send({
       message: 'Content can not be empty!',
     });
     return;
   }
+
+  const loggedUser = (req.session as UserSession).user;
+
+  if (!loggedUser || !loggedUser.id) {
+    res.status(401).send({
+      message: 'Unauthorized access!',
+    });
+    return;
+  }
+
   // create the entity
   const blogPost = new BlogPost({
-    title: req.body.title,
-    description: req.body.description,
-    published: !!req.body.published,
-    userId: (req.session as any).user.id,
+    title: requestBody.title,
+    description: requestBody.description,
+    published: !!requestBody.published,
+    userId: loggedUser.id as number,
   });
 
   blogPost.save()
     .then((data: BlogPost) => res.send(data))
-    .catch((err) => {
+    .catch((err: SequelizeScopeError) => {
       res.status(500).send({
-        message:
-          err.message || 'Some error occurred while creating the BlogPost.',
+        message: err.message || 'Some error occurred while creating the BlogPost.',
       });
     });
 };
 
-export const findAll = (req: Request, res: Response) => {
+export const findAll = (req: Request<unknown, unknown, unknown, { title?: string }>, res: Response): void => {
   const { title } = req.query;
   const condition = title ? { title: { [Op.like]: `%${title}%` } } : undefined;
 
   BlogPost.findAll({ where: condition })
     .then((blogPosts: BlogPost[]) => res.send(blogPosts))
-    .catch((err) => {
+    .catch((err: SequelizeScopeError) => {
       res.status(500).send({
-        message:
-          err.message || 'Some error occurred while retrieving blog posts.',
+        message: err.message || 'Some error occurred while retrieving blog posts.',
       });
     });
 };
 
-export const findOne = (req: Request, res: Response) => {
+export const findOne = (req: Request, res: Response): void => {
   const { id } = req.params;
 
   BlogPost.findByPk(id)
     .then((blogPost: BlogPost | null) => res.send(blogPost))
-    .catch((err) => {
+    .catch(() => {
       res.status(500).send({
         message: `Error retrieving blog post with id=${id}`,
       });
     });
 };
 
-export const update = (req: Request, res: Response) => {
+export const update = (req: Request, res: Response): void => {
   const { id } = req.params;
 
   BlogPost.update(req.body as BlogPost, { where: { id }, })
@@ -71,14 +82,14 @@ export const update = (req: Request, res: Response) => {
         });
       }
     })
-    .catch((err) => {
+    .catch(() => {
       res.status(500).send({
         message: `Error updating BlogPost with id=${id}`,
       });
     });
 };
 
-export const deleteOne = (req: Request, res: Response) => {
+export const deleteOne = (req: Request, res: Response): void => {
   const { id } = req.params;
 
   BlogPost.destroy({ where: { id }, })
@@ -93,39 +104,37 @@ export const deleteOne = (req: Request, res: Response) => {
         });
       }
     })
-    .catch((err) => {
+    .catch(() => {
       res.status(500).send({
         message: `Could not delete BlogPost with id=${id}`,
       });
     });
 };
 
-export const deleteAll = (req: Request, res: Response) => {
+export const deleteAll = (req: Request, res: Response): void => {
   BlogPost.destroy({
     where: {},
     truncate: false,
   })
     .then((nums) => res.send({ message: `${nums} BlogPosts were deleted successfully!` }))
-    .catch((err) => {
+    .catch((err: SequelizeScopeError) => {
       res.status(500).send({
-        message:
-          err.message || 'Some error occurred while removing all blog posts.',
+        message: err.message || 'Some error occurred while removing all blog posts.',
       });
     });
 };
 
-export const findAllPublished = (req: Request, res: Response) => {
+export const findAllPublished = (req: Request, res: Response): void => {
   BlogPost.findAll({ where: { published: true } })
     .then((blogPosts: BlogPost[]) => res.send(blogPosts))
-    .catch((err) => {
-    res.status(500).send({
-      message:
-        err.message || 'Some error occurred while retrieving published blog posts.',
+    .catch((err: SequelizeScopeError) => {
+      res.status(500).send({
+        message: err.message || 'Some error occurred while retrieving published blog posts.',
+      });
     });
-  });
 };
 
-export const findAllByUsername = (req: Request, res: Response) => {
+export const findAllByUsername = (req: Request, res: Response): void => {
   const username = req.params.username;
 
   if (!username) {
@@ -144,12 +153,10 @@ export const findAllByUsername = (req: Request, res: Response) => {
         attributes: ['id'],
       }
     ]
-  })
-    .then((blogPosts: BlogPost[]) => res.send(blogPosts))
-    .catch((err) => {
-    res.status(500).send({
-      message:
-        err.message || 'Some error occurred while retrieving blog posts.',
+  }).then((blogPosts: BlogPost[]) => res.send(blogPosts))
+    .catch((err: SequelizeScopeError) => {
+      res.status(500).send({
+        message: err.message || 'Some error occurred while retrieving blog posts.',
+      });
     });
-  });
 };
