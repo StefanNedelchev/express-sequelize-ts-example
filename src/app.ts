@@ -1,4 +1,3 @@
-// tslint:disable: no-console
 import { json, urlencoded } from 'body-parser';
 import compression from 'compression';
 import cors from 'cors';
@@ -51,7 +50,10 @@ const startServer = () => {
 };
 
 if (!!process.env.BUILD_DB) {
-  populateDatabase().then(startServer);
+  populateDatabase().then(
+    startServer,
+    (error) => console.log('An error occured while populating the database', error),
+  );
 } else {
   startServer();
 }

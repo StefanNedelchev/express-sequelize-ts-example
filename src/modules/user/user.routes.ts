@@ -1,7 +1,7 @@
 import { Application, Router } from 'express';
 import { findByUsername, login, logout, register } from './user.controller';
 
-export default (app: Application) => {
+export default (app: Application): void => {
   const router = Router();
 
   router.post('/register', register);

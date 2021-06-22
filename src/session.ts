@@ -6,12 +6,18 @@ import { Sequelize } from 'sequelize-typescript';
 
 dotenv.config();
 
-
-export default (app: Application, sequelize: Sequelize) => {
+export default (app: Application, sequelize: Sequelize): void => {
   const SequelizeStore = connectSession(session.Store);
+
+  const secret = process.env.SESSION_SECRET;
+
+  if (!secret) {
+    throw new Error('SESSION_SECRET is missing from env!');
+  }
+
   const sessionOptions: SessionOptions = {
     name: 'sesssionId',
-    secret: process.env.SESSION_SECRET!,
+    secret,
     store: new SequelizeStore({
       db: sequelize,
     }),

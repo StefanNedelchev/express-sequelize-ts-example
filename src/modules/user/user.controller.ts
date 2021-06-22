@@ -1,9 +1,11 @@
 import { hash } from 'bcrypt';
 import { Request, Response } from 'express';
+import { SequelizeScopeError } from 'sequelize/types';
+import { UserSession } from '../../types';
 import { User } from './user.model';
 
 
-export const register = async (req: Request, res: Response) => {
+export const register = (req: Request<unknown, unknown, User>, res: Response): void => {
   const username: string = req.body.username;
 
   // Validate request
@@ -14,7 +16,7 @@ export const register = async (req: Request, res: Response) => {
     return;
   }
 
-  User.findOne({ where: { username }})
+  User.findOne({ where: { username } })
     .then((foundUser: User | null) => {
       if (foundUser) {
         throw new Error('A use with this username already exists! Try to log in or chose another username.');
@@ -31,18 +33,17 @@ export const register = async (req: Request, res: Response) => {
     .then((user: User) => user.save())
     .then((savedUser: User) => {
       // authenticate the user
-      (req.session as any).user = savedUser;
+      (req.session as UserSession).user = savedUser;
       res.status(201).send();
     })
-    .catch((err) => {
+    .catch((err: SequelizeScopeError) => {
       res.status(500).send({
-        message:
-          err.message || 'Some error occurred while creating the user.',
+        message: err.message || 'Some error occurred while creating the user.',
       });
     });
 };
 
-export const login = (req: Request, res: Response) => {
+export const login = (req: Request<unknown, unknown, User>, res: Response): void => {
   // Validate request
   if (!req.body.username || !req.body.password) {
     res.status(400).send({
@@ -51,7 +52,7 @@ export const login = (req: Request, res: Response) => {
     return;
   }
 
-  User.findOne({ where: { username: req.body.username }})
+  User.findOne({ where: { username: req.body.username } })
     .then((user: User | null) => {
       if (!user) {
         throw new Error('User not found');
@@ -67,7 +68,7 @@ export const login = (req: Request, res: Response) => {
         throw new Error('Passwords don\'t match');
       }
       // authenticate the user
-      (req.session as any).user = user;
+      (req.session as UserSession).user = user;
       res.status(200).send();
     })
     .catch(() => {
@@ -77,7 +78,7 @@ export const login = (req: Request, res: Response) => {
     });
 };
 
-export const logout = (req: Request, res: Response) => {
+export const logout = (req: Request, res: Response): void => {
   req.session.destroy((err) => {
     if (err) {
       res.status(500).send({
@@ -90,7 +91,7 @@ export const logout = (req: Request, res: Response) => {
   });
 };
 
-export const findByUsername = (req: Request, res: Response) => {
+export const findByUsername = (req: Request, res: Response): void => {
   const username: string = req.params.username;
   // Validate request
   if (!username) {
@@ -100,7 +101,7 @@ export const findByUsername = (req: Request, res: Response) => {
     return;
   }
 
-  User.findOne({ where: { username }})
+  User.findOne({ where: { username } })
     .then((user: User | null) => res.send(user))
     .catch(() => {
       res.status(500).send({
