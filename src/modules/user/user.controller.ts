@@ -60,7 +60,7 @@ export const login = (req: Request<unknown, unknown, User>, res: Response): void
 
       return user.comparePasswrod(req.body.password).then(isMatchingPassword => ({
         user,
-        isMatchingPassword
+        isMatchingPassword,
       }));
     })
     .then(({ user, isMatchingPassword }) => {
@@ -73,7 +73,7 @@ export const login = (req: Request<unknown, unknown, User>, res: Response): void
     })
     .catch(() => {
       res.status(401).send({
-        message: 'Incorrect username or password!'
+        message: 'Incorrect username or password!',
       });
     });
 };

@@ -27,6 +27,7 @@
         "requireLast": false
       }
     }],
+    "comma-dangle": ["error", "always-multiline"],
     "comma-spacing": "error",
     "func-call-spacing": "error",
     "import/no-deprecated": "warn",

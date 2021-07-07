@@ -70,7 +70,7 @@ export const findOne = (req: Request, res: Response): void => {
 export const update = (req: Request, res: Response): void => {
   const { id } = req.params;
 
-  BlogPost.update(req.body as BlogPost, { where: { id }, })
+  BlogPost.update(req.body as BlogPost, { where: { id } })
     .then(([length]) => {
       if (length === 1) {
         res.send({
@@ -92,7 +92,7 @@ export const update = (req: Request, res: Response): void => {
 export const deleteOne = (req: Request, res: Response): void => {
   const { id } = req.params;
 
-  BlogPost.destroy({ where: { id }, })
+  BlogPost.destroy({ where: { id } })
     .then((num) => {
       if (num === 1) {
         res.send({
@@ -151,8 +151,8 @@ export const findAllByUsername = (req: Request, res: Response): void => {
         required: true,
         where: { username },
         attributes: ['id'],
-      }
-    ]
+      },
+    ],
   }).then((blogPosts: BlogPost[]) => res.send(blogPosts))
     .catch((err: SequelizeScopeError) => {
       res.status(500).send({
