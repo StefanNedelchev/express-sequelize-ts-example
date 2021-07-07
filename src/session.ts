@@ -2,11 +2,12 @@ import connectSession from 'connect-session-sequelize';
 import dotenv from 'dotenv';
 import { Application } from 'express';
 import session, { SessionOptions } from 'express-session';
-import { Sequelize } from 'sequelize-typescript';
+import { Sequelize as SequelizeTypescript } from 'sequelize-typescript';
+import { Sequelize } from 'sequelize';
 
 dotenv.config();
 
-export default (app: Application, sequelize: Sequelize): void => {
+export default (app: Application, sequelize: SequelizeTypescript): void => {
   const SequelizeStore = connectSession(session.Store);
 
   const secret = process.env.SESSION_SECRET;
@@ -19,7 +20,7 @@ export default (app: Application, sequelize: Sequelize): void => {
     name: 'sesssionId',
     secret,
     store: new SequelizeStore({
-      db: sequelize,
+      db: sequelize as Sequelize,
     }),
     resave: false,
     saveUninitialized: false,

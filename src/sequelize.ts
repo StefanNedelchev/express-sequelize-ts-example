@@ -27,7 +27,7 @@ const initializeSequelize = () => {
           idle: 10000,
         },
         models: [User, BlogPost],
-      }
+      },
     );
   }
 

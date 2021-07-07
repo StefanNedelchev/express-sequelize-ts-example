@@ -16,7 +16,7 @@ export default (): Promise<void> =>
           password: faker.internet.password(),
           role: random(1, 5),
           username: faker.internet.userName(),
-        }))
+        })),
       );
       await db.BlogPost.bulkCreate(
         times(10, () => ({
@@ -24,7 +24,7 @@ export default (): Promise<void> =>
           published: random(1, 2) == 1,
           title: faker.lorem.sentence(5),
           userId: random(1, 10),
-        }))
+        })),
       );
       console.log('Database populated');
     });
