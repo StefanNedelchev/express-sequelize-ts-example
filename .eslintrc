@@ -35,7 +35,8 @@
     "max-len": [
       "warn",
       {
-        "code": 140
+        "code": 140,
+        "ignoreStrings": true
       }
     ],
     "no-async-promise-executor": "error",
@@ -51,6 +52,7 @@
     "no-multiple-empty-lines": "error",
     "no-trailing-spaces": "error",
     "no-whitespace-before-property": "error",
+    "quotes": ["error", "single", { "allowTemplateLiterals": true }],
     "semi-spacing": "error",
     "space-in-parens": "error"
   }
