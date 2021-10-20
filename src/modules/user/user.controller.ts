@@ -1,6 +1,6 @@
 import { hash } from 'bcrypt';
 import { Request, Response } from 'express';
-import { SequelizeScopeError } from 'sequelize/types';
+import { SequelizeScopeError } from 'sequelize';
 import { UserSession } from '../../types';
 import { User } from './user.model';
 
