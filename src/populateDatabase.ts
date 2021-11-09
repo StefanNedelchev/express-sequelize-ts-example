@@ -1,3 +1,4 @@
+import { hash } from 'bcrypt';
 import faker from 'faker';
 import { random, times } from 'lodash';
 import { db, intializedSequelize } from './sequelize';
@@ -12,7 +13,7 @@ export default (): Promise<void> =>
         times(10, () => ({
           email: faker.internet.email(),
           fullName: `${faker.name.firstName()} ${faker.name.lastName()}`,
-          password: faker.internet.password(),
+          password: hash(faker.internet.password(), 8),
           role: random(1, 5),
           username: faker.internet.userName(),
         })),
