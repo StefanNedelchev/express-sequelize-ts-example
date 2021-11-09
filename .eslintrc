@@ -16,7 +16,9 @@
     "project": "./tsconfig.json"
   },
   "rules": {
+    "@typescript-eslint/explicit-module-boundary-types": "error",
     "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/no-unused-vars": "error",
     "@typescript-eslint/member-delimiter-style": ["error", {
       "multiline": {
         "delimiter": "semi",
@@ -32,6 +34,7 @@
     "func-call-spacing": "error",
     "import/no-deprecated": "warn",
     "import/order": "error",
+    "keyword-spacing": ["error", { "before": true }],
     "max-len": [
       "warn",
       {
@@ -41,18 +44,19 @@
       }
     ],
     "no-async-promise-executor": "error",
-    "no-await-in-loop": "error",
+    "no-await-in-loop": "warn",
     "no-compare-neg-zero": "error",
     "no-console": "warn",
     "no-empty": "error",
     "no-ex-assign": "error",
     "no-extra-semi": "error",
     "no-spaced-func": "error",
-    "no-mixed-operators": "warn",
     "no-multi-spaces": "error",
     "no-multiple-empty-lines": "error",
     "no-trailing-spaces": "error",
+    "no-var": "error",
     "no-whitespace-before-property": "error",
+    "no-unused-vars": "error",
     "quotes": ["error", "single", { "allowTemplateLiterals": true }],
     "semi": ["error", "always", {
       "omitLastInOneLineBlock": true
