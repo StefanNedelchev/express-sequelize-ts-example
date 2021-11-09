@@ -1,4 +1,3 @@
-// tslint:disable: no-console
 import faker from 'faker';
 import { random, times } from 'lodash';
 import { db, intializedSequelize } from './sequelize';
