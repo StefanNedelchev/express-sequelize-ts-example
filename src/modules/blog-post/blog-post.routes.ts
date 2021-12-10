@@ -1,6 +1,8 @@
 import { Application, NextFunction, Request, Response, Router } from 'express';
 import { UserSession } from '../../types';
-import { create, deleteAll, deleteOne, findAll, findAllByUsername, findAllPublished, findOne, update } from './blog-post.controller';
+import {
+ create, deleteAll, deleteOne, findAll, findAllByUsername, findAllPublished, findOne, update,
+} from './blog-post.controller';
 
 export default (app: Application): void => {
   const router = Router();

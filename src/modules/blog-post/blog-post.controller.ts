@@ -4,7 +4,6 @@ import { UserSession } from '../../types';
 import { User } from '../user/user.model';
 import { BlogPost } from './blog-post.model';
 
-
 export const create = (req: Request, res: Response): void => {
   const requestBody = req.body as Partial<BlogPost>;
 
@@ -135,7 +134,7 @@ export const findAllPublished = (req: Request, res: Response): void => {
 };
 
 export const findAllByUsername = (req: Request, res: Response): void => {
-  const username = req.params.username;
+  const { username } = req.params;
 
   if (!username) {
     res.status(400).send({

@@ -1,10 +1,11 @@
 import { compare } from 'bcrypt';
-import { AllowNull, BeforeCreate, BeforeUpdate, Column, Default, HasMany, Model, Table, Unique } from 'sequelize-typescript';
+import {
+ AllowNull, BeforeCreate, BeforeUpdate, Column, Default, HasMany, Model, Table, Unique,
+} from 'sequelize-typescript';
 import { BlogPost } from '../blog-post/blog-post.model';
 
 @Table
 export class User extends Model {
-
   @Unique
   @AllowNull(false)
   @Column
