@@ -3,8 +3,7 @@ import faker from 'faker';
 import { random, times } from 'lodash';
 import { db, intializedSequelize } from './sequelize';
 
-export default (): Promise<void> =>
-  intializedSequelize
+export default (): Promise<void> => intializedSequelize
     // Clean tables
     .sync({ force: true })
     .then(async () => {
@@ -21,7 +20,7 @@ export default (): Promise<void> =>
       await db.BlogPost.bulkCreate(
         times(10, () => ({
           description: faker.lorem.sentence(20),
-          published: random(1, 2) == 1,
+          published: random(1, 2) === 1,
           title: faker.lorem.sentence(5),
           userId: random(1, 10),
         })),

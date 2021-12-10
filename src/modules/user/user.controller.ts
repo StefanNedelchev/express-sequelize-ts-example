@@ -4,9 +4,8 @@ import { SequelizeScopeError } from 'sequelize';
 import { UserSession } from '../../types';
 import { User } from './user.model';
 
-
 export const register = (req: Request<unknown, unknown, User>, res: Response): void => {
-  const username: string = req.body.username;
+  const { username } = req.body;
 
   // Validate request
   if (!username || !req.body.password || !req.body.fullName || !req.body.email) {
@@ -58,7 +57,7 @@ export const login = (req: Request<unknown, unknown, User>, res: Response): void
         throw new Error('User not found');
       }
 
-      return user.comparePasswrod(req.body.password).then(isMatchingPassword => ({
+      return user.comparePasswrod(req.body.password).then((isMatchingPassword) => ({
         user,
         isMatchingPassword,
       }));
@@ -92,7 +91,7 @@ export const logout = (req: Request, res: Response): void => {
 };
 
 export const findByUsername = (req: Request, res: Response): void => {
-  const username: string = req.params.username;
+  const { username } = req.params;
   // Validate request
   if (!username) {
     res.status(400).send({
