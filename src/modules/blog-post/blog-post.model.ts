@@ -1,5 +1,5 @@
 import {
- AllowNull, BelongsTo, Column, Default, ForeignKey, Model, Table, Unique,
+  AllowNull, BelongsTo, Column, Default, ForeignKey, Model, Table, Unique,
 } from 'sequelize-typescript';
 import { User } from '../user/user.model';
 
@@ -8,20 +8,20 @@ export class BlogPost extends Model {
   @Unique
   @AllowNull(false)
   @Column
-  title!: string;
+    title!: string;
 
   @AllowNull(false)
   @Column
-  description!: string;
+    description!: string;
 
   @Default(false)
   @Column
-  published!: boolean;
+    published!: boolean;
 
   @ForeignKey(() => User)
   @Column
-  userId!: number;
+    userId!: number;
 
   @BelongsTo(() => User)
-  user!: User;
+    user!: User;
 }
