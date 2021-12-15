@@ -1,6 +1,6 @@
 import { compare } from 'bcrypt';
 import {
- AllowNull, BeforeCreate, BeforeUpdate, Column, Default, HasMany, Model, Table, Unique,
+  AllowNull, BeforeCreate, BeforeUpdate, Column, Default, HasMany, Model, Table, Unique,
 } from 'sequelize-typescript';
 import { BlogPost } from '../blog-post/blog-post.model';
 
@@ -9,27 +9,27 @@ export class User extends Model {
   @Unique
   @AllowNull(false)
   @Column
-  username!: string;
+    username!: string;
 
   @AllowNull(false)
   @Column
-  password!: string;
+    password!: string;
 
   @Unique
   @AllowNull(false)
   @Column
-  email!: string;
+    email!: string;
 
   @Column
-  fullName?: string;
+    fullName?: string;
 
   @AllowNull(false)
   @Default(5)
   @Column
-  role!: number;
+    role!: number;
 
   @HasMany(() => BlogPost)
-  blogPosts?: BlogPost[];
+    blogPosts?: BlogPost[];
 
   @BeforeCreate
   @BeforeUpdate
