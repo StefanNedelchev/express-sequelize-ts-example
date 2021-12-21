@@ -3,13 +3,10 @@
     "airbnb-base",
     "airbnb-typescript/base",
     "plugin:@typescript-eslint/recommended",
-    "plugin:@typescript-eslint/recommended-requiring-type-checking",
-    "plugin:import/recommended",
-    "plugin:import/typescript"
+    "plugin:@typescript-eslint/recommended-requiring-type-checking"
   ],
   "plugins": [
     "@typescript-eslint",
-    "import",
     "prefer-arrow"
   ],
   "parser": "@typescript-eslint/parser",
@@ -42,7 +39,6 @@
       "omitLastInOneLineBlock": true
     }],
     "@typescript-eslint/unbound-method": "off",
-    "arrow-spacing": "error",
     "default-case": "warn",
     "import/no-cycle": "off",
     "import/no-deprecated": "warn",
