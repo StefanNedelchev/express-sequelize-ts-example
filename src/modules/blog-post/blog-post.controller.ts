@@ -149,6 +149,7 @@ export const findAllByUsername = (req: Request, res: Response): void => {
         model: User,
         required: true,
         where: { username },
+        as: 'user',
         attributes: ['id'],
       },
     ],
