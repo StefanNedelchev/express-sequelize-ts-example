@@ -19,7 +19,7 @@
     "compression": "^1.7.4",
     "connect-session-sequelize": "^7.1.2",
     "cors": "^2.8.5",
-    "dotenv": "^14.3.0",
+    "dotenv": "^14.3.2",
     "express": "^4.17.2",
     "express-session": "^1.17.2",
     "faker": "^5.5.3",
