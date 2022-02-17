@@ -20,7 +20,7 @@
     "connect-session-sequelize": "^7.1.2",
     "cors": "^2.8.5",
     "dotenv": "^14.3.2",
-    "express": "^4.17.2",
+    "express": "^4.17.3",
     "express-session": "^1.17.2",
     "faker": "^5.5.3",
     "helmet": "^5.0.2",
