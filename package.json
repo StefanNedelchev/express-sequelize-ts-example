@@ -26,7 +26,7 @@
     "helmet": "^5.0.2",
     "mysql2": "^2.3.3",
     "reflect-metadata": "^0.1.13",
-    "sequelize": "^6.18.0",
+    "sequelize": "^6.19.0",
     "sequelize-typescript": "^2.1.3"
   },
   "devDependencies": {
@@ -36,9 +36,9 @@
     "@types/express": "^4.17.13",
     "@types/express-session": "^1.17.4",
     "@types/faker": "^5.5.9",
-    "@types/node": "^14.18.12",
-    "@typescript-eslint/eslint-plugin": "^5.18.0",
-    "@typescript-eslint/parser": "^5.18.0",
+    "@types/node": "^14.18.13",
+    "@typescript-eslint/eslint-plugin": "^5.19.0",
+    "@typescript-eslint/parser": "^5.19.0",
     "eslint": "^8.13.0",
     "eslint-config-airbnb-typescript": "^17.0.0",
     "eslint-plugin-import": "^2.26.0",
