@@ -34,7 +34,7 @@ app.use(xssFilter());
 registerSession(app, intializedSequelize);
 
 // simple route to check if the server works
-app.get('/', (req, res) => {
+app.get('/', (_req, res) => {
   res.json({ message: 'It works!' });
 });
 
@@ -43,13 +43,13 @@ registerRoutes(app);
 
 // set port, listen for requests
 const startServer = () => {
-  const PORT = process.env.PORT || 8080;
+  const PORT = process.env['PORT'] || 8080;
   app.listen(PORT, () => {
     console.log(`Server is running on port http://localhost:${PORT}.`);
   });
 };
 
-if (process.env.BUILD_DB === 'true') {
+if (process.env['BUILD_DB'] === 'true') {
   populateDatabase().then(
     startServer,
     (error) => console.log('An error occured while populating the database', error),

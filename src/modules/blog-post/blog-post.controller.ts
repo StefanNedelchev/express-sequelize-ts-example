@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Op, SequelizeScopeError } from 'sequelize';
+import { Op, SequelizeScopeError, WhereOptions } from 'sequelize';
 import { UserSession } from '../../types';
 import { User } from '../user/user.model';
 import { BlogPost } from './blog-post.model';
@@ -43,7 +43,7 @@ export const create = (req: Request, res: Response): void => {
 
 export const findAll = (req: Request<unknown, unknown, unknown, { title?: string }>, res: Response): void => {
   const { title } = req.query;
-  const condition = title ? { title: { [Op.like]: `%${title}%` } } : undefined;
+  const condition: WhereOptions<BlogPost> = title ? { title: { [Op.like]: `%${title}%` } } : {};
 
   BlogPost.findAll({ where: condition })
     .then((blogPosts: BlogPost[]) => res.send(blogPosts))
@@ -54,7 +54,7 @@ export const findAll = (req: Request<unknown, unknown, unknown, { title?: string
     });
 };
 
-export const findOne = (req: Request, res: Response): void => {
+export const findOne = (req: Request<{ id: string }>, res: Response): void => {
   const { id } = req.params;
 
   BlogPost.findByPk(id)
@@ -66,7 +66,7 @@ export const findOne = (req: Request, res: Response): void => {
     });
 };
 
-export const update = (req: Request, res: Response): void => {
+export const update = (req: Request<{ id: string }>, res: Response): void => {
   const { id } = req.params;
 
   BlogPost.update(req.body as BlogPost, { where: { id } })
@@ -88,7 +88,7 @@ export const update = (req: Request, res: Response): void => {
     });
 };
 
-export const deleteOne = (req: Request, res: Response): void => {
+export const deleteOne = (req: Request<{ id: string }>, res: Response): void => {
   const { id } = req.params;
 
   BlogPost.destroy({ where: { id } })
@@ -110,7 +110,7 @@ export const deleteOne = (req: Request, res: Response): void => {
     });
 };
 
-export const deleteAll = (req: Request, res: Response): void => {
+export const deleteAll = (_req: Request, res: Response): void => {
   BlogPost.destroy({
     where: {},
     truncate: false,
@@ -123,7 +123,7 @@ export const deleteAll = (req: Request, res: Response): void => {
     });
 };
 
-export const findAllPublished = (req: Request, res: Response): void => {
+export const findAllPublished = (_req: Request, res: Response): void => {
   BlogPost.findAll({ where: { published: true } })
     .then((blogPosts: BlogPost[]) => res.send(blogPosts))
     .catch((err: SequelizeScopeError) => {

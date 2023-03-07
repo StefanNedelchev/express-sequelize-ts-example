@@ -10,7 +10,7 @@ dotenv.config();
 export default (app: Application, sequelize: SequelizeTypescript): void => {
   const SequelizeStore = connectSession(session.Store);
 
-  const secret = process.env.SESSION_SECRET;
+  const secret = process.env['SESSION_SECRET'];
 
   if (!secret) {
     throw new Error('SESSION_SECRET is missing from env!');
