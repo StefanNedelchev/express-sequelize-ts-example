@@ -16,6 +16,12 @@
     "project": "./tsconfig.json"
   },
   "rules": {
+    "@typescript-eslint/dot-notation": [
+      "error",
+      {
+        "allowIndexSignaturePropertyAccess": true,
+      }
+    ],
     "@typescript-eslint/explicit-module-boundary-types": "error",
     "@typescript-eslint/lines-between-class-members": ["error", "always", { "exceptAfterSingleLine": true }],
     "@typescript-eslint/no-explicit-any": "error",
