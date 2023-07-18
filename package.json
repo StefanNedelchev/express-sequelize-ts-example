@@ -24,7 +24,7 @@
     "express-session": "^1.17.3",
     "faker": "^5.5.3",
     "helmet": "^7.0.0",
-    "mysql2": "^3.5.0",
+    "mysql2": "^3.5.2",
     "reflect-metadata": "^0.1.13",
     "sequelize": "^6.32.1",
     "sequelize-typescript": "^2.1.5"
@@ -38,13 +38,13 @@
     "@types/express-session": "^1.17.7",
     "@types/faker": "^5.5.9",
     "@types/node": "^16.18.38",
-    "@typescript-eslint/eslint-plugin": "^5.61.0",
-    "@typescript-eslint/parser": "^5.61.0",
-    "eslint": "^8.44.0",
-    "eslint-config-airbnb-typescript": "^17.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.62.0",
+    "@typescript-eslint/parser": "^5.62.0",
+    "eslint": "^8.45.0",
+    "eslint-config-airbnb-typescript": "^17.1.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-prefer-arrow": "^1.2.3",
-    "nodemon": "^2.0.22",
+    "nodemon": "^3.0.1",
     "ts-node": "^10.9.1",
     "typescript": "~5.0.4"
   }
