@@ -1,7 +1,5 @@
 {
   "editor.codeActionsOnSave": {
-    "source.fixAll.tslint": true,
-    "source.fixAll.eslint": true,
-  },
-  "typescript.tsdk": "node_modules\\typescript\\lib",
+    "source.fixAll.eslint": true
+  }
 }
