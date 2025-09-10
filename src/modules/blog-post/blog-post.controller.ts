@@ -17,7 +17,7 @@ export const create = (req: Request, res: Response): void => {
 
   const loggedUser = (req.session as UserSession).user;
 
-  if (!loggedUser || !loggedUser.id) {
+  if (!loggedUser?.id) {
     res.status(401).send({
       message: 'Unauthorized access!',
     });
@@ -41,7 +41,10 @@ export const create = (req: Request, res: Response): void => {
     });
 };
 
-export const findAll = (req: Request<unknown, unknown, unknown, { title?: string }>, res: Response): void => {
+export const findAll = (
+  req: Request<unknown, unknown, unknown, { title?: string }>,
+  res: Response,
+): void => {
   const { title } = req.query;
   const condition: WhereOptions<BlogPost> = title ? { title: { [Op.like]: `%${title}%` } } : {};
 

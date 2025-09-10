@@ -8,20 +8,20 @@ export class BlogPost extends Model {
   @Unique
   @AllowNull(false)
   @Column
-    title!: string;
+  title!: string;
 
   @AllowNull(false)
   @Column
-    description!: string;
+  description!: string;
 
   @Default(false)
   @Column
-    published!: boolean;
+  published!: boolean;
 
   @ForeignKey(() => User)
   @Column
-    userId!: number;
+  userId!: number;
 
   @BelongsTo(() => User)
-    user!: User;
+  user!: User;
 }

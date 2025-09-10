@@ -52,7 +52,7 @@ const startServer = () => {
 if (process.env['BUILD_DB'] === 'true') {
   populateDatabase().then(
     startServer,
-    (error) => console.log('An error occured while populating the database', error),
+    (error: unknown) => { console.log('An error occured while populating the database', error); },
   );
 } else {
   startServer();
