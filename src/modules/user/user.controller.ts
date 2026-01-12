@@ -90,7 +90,7 @@ export const logout = (req: Request, res: Response): void => {
   });
 };
 
-export const findByUsername = (req: Request, res: Response): void => {
+export const findByUsername = (req: Request<{ username: string }>, res: Response): void => {
   const { username } = req.params;
   // Validate request
   if (!username) {
